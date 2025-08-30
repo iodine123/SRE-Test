@@ -14,6 +14,14 @@ resource "google_container_cluster" "primary" {
   network    = google_compute_network.gke-vpc.name
   subnetwork = google_compute_subnetwork.subnet-1a.self_link
 
+  logging_config {
+    enable_components = ["SYSTEM", "WORKLOAD"] # Logging for both system and app
+  }
+
+  monitoring_config {
+    enable_components = ["SYSTEM", "WORKLOAD"] # Metrics for both system and app
+  }
+
 }
 
 
