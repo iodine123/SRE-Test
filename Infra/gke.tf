@@ -9,6 +9,7 @@ resource "google_container_cluster" "primary" {
   location = var.region
 
   remove_default_node_pool = true
+  deletion_protection = false
 
   node_pool {
     name       = "default-pool"
@@ -16,6 +17,9 @@ resource "google_container_cluster" "primary" {
 
     node_config {
       machine_type = "n1-standard-1"
+      labels = {
+        "kind" = "gke-nodes"
+      }
       preemptible  = true
       oauth_scopes = [
         "https://www.googleapis.com/auth/cloud-platform"
