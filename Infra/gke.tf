@@ -20,7 +20,7 @@ resource "google_container_cluster" "primary" {
       labels = {
         "kind" = "gke-nodes"
       }
-      preemptible  = true
+      # preemptible  = true
       oauth_scopes = [
         "https://www.googleapis.com/auth/cloud-platform"
       ]
