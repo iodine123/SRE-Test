@@ -11,6 +11,7 @@ Infra/.terraform.lock.hcl
 
 # Sensitive variable file
 Infra/variables.tf
+Infra/iam.tf
 
 # Terraform plan file
 *.plan
