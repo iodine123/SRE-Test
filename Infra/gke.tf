@@ -5,34 +5,37 @@ resource "google_service_account" "gke_node_sa" {
 }
 
 resource "google_container_cluster" "primary" {
-  name = "cloudmile-test-cluster"
-  location = var.region
-
+  name               = "cloudmile-test-cluster"
+  location           = var.region
   remove_default_node_pool = true
+  initial_node_count = 1
   deletion_protection = false
 
   network    = google_compute_network.gke-vpc.name
-  subnetwork = google_compute_subnetwork.subnet-1a.name
+  subnetwork = google_compute_subnetwork.subnet-1a.self_link
 
-  node_pool {
-    name       = "default-pool"
-    node_count = 1
+}
 
-    node_config {
-      machine_type = "e2-medium"
-      labels = {
-        "kind" = "gke-nodes"
-      }
-      # preemptible  = true
-      oauth_scopes = [
-        "https://www.googleapis.com/auth/cloud-platform"
-      ]
-      service_account = google_service_account.gke_node_sa.email
+resource "google_container_node_pool" "node-pool" {
+  name       = "node-pool"
+  cluster    = google_container_cluster.primary.name
+  location   = var.region
+  node_count = 1
+
+  node_config {
+    machine_type = "n1-standard-1"
+    labels = {
+      "kind" = "gke-nodes"
     }
+    preemptible  = true
+    oauth_scopes = [
+      "https://www.googleapis.com/auth/cloud-platform"
+    ]
+    service_account = google_service_account.gke_node_sa.email
+  }
 
-    management {
-      auto_repair  = true
-      auto_upgrade = true
-    }
+  management {
+    auto_repair  = true
+    auto_upgrade = true
   }
 }
