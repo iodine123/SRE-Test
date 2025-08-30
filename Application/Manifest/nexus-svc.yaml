@@ -1,13 +1,13 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: nexus
+  name: nexus-service
   labels:
     app: nexus
 spec:
-  type: LoadBalancer
+  type: ClusterIP
   ports:
-    - port: 80
+    - port: 8081
       targetPort: 8081
       protocol: TCP
       name: http

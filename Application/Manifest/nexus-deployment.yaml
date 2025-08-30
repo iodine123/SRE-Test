@@ -14,9 +14,11 @@ spec:
       labels:
         app: nexus
     spec:
+      securityContext:
+        fsGroup: 200
       containers:
       - name: nexus
-        image: gcr.io/sre-test-cloudmile-project/nexus:3.68.0
+        image: asia-southeast2-docker.pkg.dev/sre-test-cloudmile-project/cloudmile-registry/nexus:3.83.0
         ports:
         - containerPort: 8081
         volumeMounts:
