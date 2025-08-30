@@ -6,6 +6,4 @@ RUN mkdir -p /opt/sonatype/nexus/deploy && \
     curl -L -o /opt/sonatype/nexus/deploy/nexus-repository-google-cloud-blobstore-latest-bundle.kar \
     https://repository.sonatype.org/service/local/repositories/releases/content/org/sonatype/nexus/plugins/nexus-blobstore-google-cloud/0.61.0/nexus-blobstore-google-cloud-0.61.0.kar
 
-COPY secret.json /nexus-data/secret.json
-
 USER nexus
