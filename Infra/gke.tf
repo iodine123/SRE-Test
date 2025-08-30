@@ -1,10 +1,14 @@
 
+resource "google_service_account" "gke_node_sa" {
+  account_id   = "gk-node-sa"
+  display_name = "GKE Node Service Account for Nexus"
+}
+
 resource "google_container_cluster" "primary" {
-  name = "CloudMile-Test-Cluster"
+  name = "cloudmile-test-cluster"
   location = var.region
 
   remove_default_node_pool = true
-  initial_node_count = 1
 
   node_pool {
     name       = "default-pool"
@@ -16,6 +20,7 @@ resource "google_container_cluster" "primary" {
       oauth_scopes = [
         "https://www.googleapis.com/auth/cloud-platform"
       ]
+      service_account = google_service_account.gke_node_sa.email
     }
 
     management {
