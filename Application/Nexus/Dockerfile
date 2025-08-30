@@ -1,4 +1,4 @@
-FROM sonatype/nexus3
+FROM sonatype/nexus3:3.68.0
 
 # Install Google Cloud Storage (GCS) blob store plugin
 USER root
