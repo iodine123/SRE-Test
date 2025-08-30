@@ -1,5 +1,5 @@
-resource "google_storage_bucket" "nexus_bucket" {
-  name          = "GCS-Storage"
+resource "google_storage_bucket" "gcs-storage" {
+  name          = "${var.project_id}-gcs-storage"
   location      = var.region
   force_destroy = true
 
