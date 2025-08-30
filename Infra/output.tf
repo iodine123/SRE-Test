@@ -13,3 +13,23 @@ output "kubernetes_endpoint" {
 output "gke_service_account" {
   value = google_service_account.gke_node_sa.email
 }
+
+output "vpc_network_name" {
+  value = google_compute_network.gke-vpc.name
+}
+
+output "vpc_network_self_link" {
+  value = google_compute_network.gke-vpc.self_link
+}
+
+output "subnet_name" {
+  value = google_compute_subnetwork.subnet-1a.name
+}
+
+output "subnet_ip_cidr_range" {
+  value = google_compute_subnetwork.subnet-1a.ip_cidr_range
+}
+
+output "subnet_self_link" {
+  value = google_compute_subnetwork.subnet-1a.self_link
+}

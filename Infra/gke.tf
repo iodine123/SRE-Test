@@ -11,12 +11,15 @@ resource "google_container_cluster" "primary" {
   remove_default_node_pool = true
   deletion_protection = false
 
+  network    = google_compute_network.gke-vpc.name
+  subnetwork = google_compute_subnetwork.subnet-1a.name
+
   node_pool {
     name       = "default-pool"
     node_count = 1
 
     node_config {
-      machine_type = "n1-standard-1"
+      machine_type = "e2-medium"
       labels = {
         "kind" = "gke-nodes"
       }
