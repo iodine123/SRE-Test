@@ -16,6 +16,7 @@ resource "google_container_cluster" "primary" {
 
 }
 
+
 resource "google_container_node_pool" "node-pool" {
   name       = "node-pool"
   cluster    = google_container_cluster.primary.name
